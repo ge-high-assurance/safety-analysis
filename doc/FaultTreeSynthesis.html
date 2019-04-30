@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="previous" href="FaultTree.html">
+<link rel="next" href="Modeling.html">
+<link rel="Up" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="FaultTree" rel="Chapter" href="FaultTree.html">
+<link title="FaultTreeSynthesis" rel="Chapter" href="FaultTreeSynthesis.html">
+<link title="Modeling" rel="Chapter" href="Modeling.html">
+<link title="Qualitative" rel="Chapter" href="Qualitative.html">
+<link title="Quantitative" rel="Chapter" href="Quantitative.html">
+<link title="SafetyAnalysis" rel="Chapter" href="SafetyAnalysis.html">
+<link title="Visualization" rel="Chapter" href="Visualization.html"><title>FaultTreeSynthesis</title>
+</head>
+<body>
+<div class="navbar"><a class="pre" href="FaultTree.html" title="FaultTree">Previous</a>
+&nbsp;<a class="up" href="index.html" title="Index">Up</a>
+&nbsp;<a class="post" href="Modeling.html" title="Modeling">Next</a>
+</div>
+<h1>Module <a href="type_FaultTreeSynthesis.html">FaultTreeSynthesis</a></h1>
+
+<pre><span class="keyword">module</span> FaultTreeSynthesis: <code class="code">sig</code> <a href="FaultTreeSynthesis.html">..</a> <code class="code">end</code></pre><div class="info module top">
+Fault trees should not be constructed manually by typical users. Instead,
+   they should be synthesized from libraries of components and
+   models. Components are represented with the <i>component</i> type; component
+   instances are represented with the <i>instance</i> type; component libraries are
+   just a list of components; and models are represented with the <i>model</i>
+   type. Here is an example of a library. It is just a list of components.
+<p>
+
+   <pre class="codepre"><code class="code">   let nasa_handbook_lib =
+   [ {name         = "System"; 
+      faults       = ["fault"]; 
+      input_flows  = ["in"];
+      basic_events = ["sys_fl"];
+      event_info   = [(1.e-6, 1.)];
+      output_flows = ["out"];
+      formulas     = [(["out"; "fault"], Or [F ["sys_fl"]; F ["in"; "fault"]])] }];; 
+   </code></pre>
+<p>
+
+   Here is an example of a model. It is a list of component instances along with
+   connection information and the identification of a top-level fault.
+<p>
+
+   <pre class="codepre"><code class="code">   let nasa_handbook_model =
+   { instances =  [ makeInstance "Orbiter" "System" ();
+                    makeInstance "Main Engine" "System" (); ];
+   connections =  [ (("Orbiter", "in"), ("Main Engine", "out"));
+                    (("Main Engine", "in"), ("Orbiter", "out")); ];
+   top_fault =("Orbiter", F["out"; "fault"]) } ;;
+   </code></pre>
+<p>
+
+   The top-level functions for modeling systems are:
+<p>
+<ul>
+<li><b>model_to_ftree</b>: a function that given a library of components and a
+   model synthesizes a fault tree for the top-level event of the model. The
+   fault tree synthesized can then be analyzed using the fault tree top-level
+   functions.</li>
+</ul>
+<br>
+</div>
+<hr width="100%">
+
+<pre><span id="VALmodel_to_ftree"><span class="keyword">val</span> model_to_ftree</span> : <code class="type"><a href="Modeling.html#TYPEcomponent">Modeling.component</a> Core.Std.List.t -><br>       <a href="Modeling.html#TYPEmodel">Modeling.model</a> -> (string * string) <a href="FaultTree.html#TYPEftree">FaultTree.ftree</a></code></pre><div class="info ">
+Given a library of components and a model, synthesize the fault tree
+    corresponding to the top-level event of the model.<br>
+</div>
+
+<pre><span id="VALupdate_comp_form"><span class="keyword">val</span> update_comp_form</span> : <code class="type">'a -><br>       'a list <a href="Modeling.html#TYPEformula">Modeling.formula</a> -> 'a Core.Std.List.t -> 'a list <a href="Modeling.html#TYPEformula">Modeling.formula</a></code></pre>
+<pre><span id="VALupdate_comp_forms"><span class="keyword">val</span> update_comp_forms</span> : <code class="type">('a list * 'a list <a href="Modeling.html#TYPEformula">Modeling.formula</a>) Core.Std.List.t -><br>       'a Core.Std.List.t -> ('a list * 'a list <a href="Modeling.html#TYPEformula">Modeling.formula</a>) Core.Std.List.t</code></pre>
+<pre><span id="VALupdate_component"><span class="keyword">val</span> update_component</span> : <code class="type"><a href="Modeling.html#TYPEcomponent">Modeling.component</a> -> <a href="Modeling.html#TYPEcomponent">Modeling.component</a></code></pre>
+<pre><span id="VALupdate_library"><span class="keyword">val</span> update_library</span> : <code class="type"><a href="Modeling.html#TYPEcomponent">Modeling.component</a> Core.Std.List.t -> <a href="Modeling.html#TYPEcomponent">Modeling.component</a> Core.Std.List.t</code></pre></body></html>

@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="previous" href="Validation.html">
+<link rel="Up" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="FaultTree" rel="Chapter" href="FaultTree.html">
+<link title="FaultTreeSynthesis" rel="Chapter" href="FaultTreeSynthesis.html">
+<link title="Modeling" rel="Chapter" href="Modeling.html">
+<link title="Qualitative" rel="Chapter" href="Qualitative.html">
+<link title="Quantitative" rel="Chapter" href="Quantitative.html">
+<link title="SafetyAnalysis" rel="Chapter" href="SafetyAnalysis.html">
+<link title="Validation" rel="Chapter" href="Validation.html">
+<link title="Visualization" rel="Chapter" href="Visualization.html"><title>Visualization</title>
+</head>
+<body>
+<div class="navbar"><a class="pre" href="Validation.html" title="Validation">Previous</a>
+&nbsp;<a class="up" href="index.html" title="Index">Up</a>
+&nbsp;</div>
+<h1>Module <a href="type_Visualization.html">Visualization</a></h1>
+
+<pre><span class="keyword">module</span> Visualization: <code class="code">sig</code> <a href="Visualization.html">..</a> <code class="code">end</code></pre><div class="info module top">
+Fault trees, formulas, and models can be visualized in various ways. Here are
+   the top-level visualization functions. In order to use the visualization
+   code, you have to have graphviz installed in your path.
+<p>
+<ul>
+<li><b>dot_gen_show_direct_tree_file</b> : a function for directly visualizing
+   fault trees.</li>
+</ul>
+<ul>
+<li><b>dot_gen_show_tree_file</b> : a function for simplifying and visualizing
+   fault trees.</li>
+</ul>
+<ul>
+<li><b>dot_gen_show_formula_file</b> : a function for visualizing monotone Boolean
+   formulas.</li>
+</ul>
+<ul>
+<li><b>dot_gen_show_ph_file</b> : This function generates and displays a
+   visualization of the physical architecture. By this I mean we get one node
+   per instance of a component in a model.  If there are k outputs from
+   component A that are connected to k inputs from component B, then only one
+   edge is shown between the components. This gives us the highest-level view of
+   the system, as is shows an abstract view showing only components and
+   connectivity information (yes/no).</li>
+</ul>
+<ul>
+<li><b>dot_gen_show_funct_file</b> : This function generates and displays a
+   visualization of the functional architecture. This is an elaboration of the
+   physical architecture that in addition shows input port and output ports. Now
+   edges are from port to port, so we get a mode detailed view of the model. For
+   example, in this view of a model, if there are k outputs from component A
+   that are connected to k inputs from component B, then k edges are shown
+   between the components as there is an edge from one port to another if the
+   first port's output is the input to the second port.</li>
+</ul>
+<ul>
+<li><b>dot_gen_show_fault_file</b> : This function generate and displays a
+   visualization of the propagation of faults through the architecture.  This is
+   an elaboration of the functional model that in addition shows basic events
+   associated with components and shows what parts of the model can affect the
+   probability of a the top-level fault. If an edge (corresponding to a flow of
+   information from one component to another) can affect the top-level fault, it
+   is colored red. If a basic event can affect the top-level fault, then a (set
+   of) red edge(s) is added from that event to the output(s) along which the
+   basic event propogates.</li>
+</ul>
+
+   Here is an example of how the above functions can be used to visualize and
+   analyze the example library and model given above.
+<p>
+
+   <pre class="codepre"><code class="code">   dot_gen_show_ph_file nasa_handbook_model "mpnasa.gv";;
+   dot_gen_show_funct_file nasa_handbook_lib nasa_handbook_model "mfnasa.gv";;
+   dot_gen_show_fault_file nasa_handbook_lib nasa_handbook_model "mftnasa.gv";;
+
+   let nasa_ftree = model_to_ftree nasa_handbook_lib nasa_handbook_model ;;
+   dot_gen_show_direct_tree_file "tdnasa.gv" nasa_ftree ;;
+   dot_gen_show_tree_file "tnasa.gv" nasa_ftree ;;
+
+   let nasa_cutsets = cutsets nasa_ftree;;
+   dot_gen_show_formula_file "csnasa.gv" nasa_cutsets ;;
+
+   let nasa_probErrorCut = probErrorCut nasa_ftree ;;
+   let nasa_probErrorCutImp = probErrorCutImp nasa_ftree ;;
+   </code></pre><br>
+</div>
+<hr width="100%">
+
+<pre><span id="VALunflatten_exe"><span class="keyword">val</span> unflatten_exe</span> : <code class="type">string</code></pre>
+<pre><span id="VALdot_exe"><span class="keyword">val</span> dot_exe</span> : <code class="type">string</code></pre>
+<pre><span id="VALdot_gen_show_direct_tree_file"><span class="keyword">val</span> dot_gen_show_direct_tree_file</span> : <code class="type">?rend:Core.Std.String.t -><br>       ?splines:string -><br>       ?layout:string -><br>       ?overlap:string -><br>       ?unflatten:bool -><br>       Core.Std.String.t -><br>       (Core.Std.String.t * Core.Std.String.t) <a href="FaultTree.html#TYPEftree">FaultTree.ftree</a> -> unit</code></pre><div class="info ">
+A function for directly visualizing fault trees.<br>
+</div>
+
+<pre><span id="VALdot_gen_show_tree_file"><span class="keyword">val</span> dot_gen_show_tree_file</span> : <code class="type">?rend:Core.Std.String.t -><br>       ?splines:string -><br>       ?layout:string -><br>       ?overlap:string -><br>       ?unflatten:bool -><br>       Core.Std.String.t -><br>       (Core.Std.String.t * Core.Std.String.t) <a href="FaultTree.html#TYPEftree">FaultTree.ftree</a> -> unit</code></pre><div class="info ">
+A function for simplifying and visualizing fault trees.<br>
+</div>
+
+<pre><span id="VALdot_gen_show_ssfc_tree_file"><span class="keyword">val</span> dot_gen_show_ssfc_tree_file</span> : <code class="type">?rend:Core.Std.String.t -><br>       ?splines:string -><br>       ?layout:string -><br>       ?overlap:string -><br>       ?unflatten:bool -><br>       Core.Std.String.t -><br>       (Core.Std.String.t * Core.Std.String.t) <a href="FaultTree.html#TYPEftree">FaultTree.ftree</a> -> unit</code></pre>
+<pre><span id="VALdot_gen_show_nndsimp_tree_file"><span class="keyword">val</span> dot_gen_show_nndsimp_tree_file</span> : <code class="type">?rend:Core.Std.String.t -><br>       ?splines:string -><br>       ?layout:string -><br>       ?overlap:string -><br>       ?unflatten:bool -><br>       Core.Std.String.t -><br>       (Core.Std.String.t * Core.Std.String.t) <a href="FaultTree.html#TYPEftree">FaultTree.ftree</a> -> unit</code></pre>
+<pre><span id="VALdot_gen_show_formula_file"><span class="keyword">val</span> dot_gen_show_formula_file</span> : <code class="type">?rend:Core.Std.String.t -><br>       ?splines:string -><br>       ?layout:string -><br>       ?overlap:string -><br>       ?unflatten:bool -><br>       Core.Std.String.t -><br>       (Core.Std.String.t * Core.Std.String.t) <a href="FaultTree.html#TYPEpexp">FaultTree.pexp</a> -> unit</code></pre><div class="info ">
+A function for visualizing monotone Boolean formulas.<br>
+</div>
+
+<pre><span id="VALdot_gen_show_ph_file"><span class="keyword">val</span> dot_gen_show_ph_file</span> : <code class="type">?rend:Core.Std.String.t -><br>       ?splines:string -><br>       ?layout:string -><br>       ?overlap:string -><br>       ?unflatten:bool -> <a href="Modeling.html#TYPEmodel">Modeling.model</a> -> Core.Std.String.t -> unit</code></pre><div class="info ">
+This function generates and displays a visualization of the physical
+    architecture. By this I mean we get one node per instance of a component in
+    a model.  If there are k outputs from component A that are connected to k
+    inputs from component B, then only one edge is shown between the
+    components. This gives us the highest-level view of the system, as is shows
+    an abstract view showing only components and connectivity information
+    (yes/no).<br>
+</div>
+
+<pre><span id="VALdot_gen_show_funct_file"><span class="keyword">val</span> dot_gen_show_funct_file</span> : <code class="type">?rend:Core.Std.String.t -><br>       ?splines:string -><br>       ?layout:string -><br>       ?overlap:string -><br>       ?unflatten:bool -><br>       <a href="Modeling.html#TYPEcomponent">Modeling.component</a> Core.Std.List.t -><br>       <a href="Modeling.html#TYPEmodel">Modeling.model</a> -> Core.Std.String.t -> unit</code></pre><div class="info ">
+This function generates and displays a visualization of the functional
+    architecture. This is an elaboration of the physical architecture that in
+    addition shows input port and output ports. Now edges are from port to port,
+    so we get a mode detailed view of the model. For example, in this view of a
+    model, if there are k outputs from component A that are connected to k
+    inputs from component B, then k edges are shown between the components as
+    there is an edge from one port to another if the first port's output is the
+    input to the second port.<br>
+</div>
+
+<pre><span id="VALdot_gen_show_fault_file"><span class="keyword">val</span> dot_gen_show_fault_file</span> : <code class="type">?rend:Core.Std.String.t -><br>       ?splines:string -><br>       ?layout:string -><br>       ?overlap:string -><br>       ?unflatten:bool -><br>       <a href="Modeling.html#TYPEcomponent">Modeling.component</a> Core.Std.List.t -><br>       <a href="Modeling.html#TYPEmodel">Modeling.model</a> -> Core.Std.String.t -> unit</code></pre><div class="info ">
+This function generates and displays a visualization of the propagation of
+    faults through the architecture.  This is an elaboration of the functional
+    model that in addition shows basic events associated with components and
+    shows what parts of the model can affect the probability of a the top-level
+    fault. If an edge (corresponding to a flow of information from one component
+    to another) can affect the top-level fault, it is colored red. If a basic
+    event can affect the top-level fault, then a (set of) red edge(s) is added
+    from that event to the output(s) along which the basic event propogates.<br>
+</div>
+</body></html>

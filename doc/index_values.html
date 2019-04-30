@@ -1,0 +1,200 @@
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="FaultTree" rel="Chapter" href="FaultTree.html">
+<link title="FaultTreeSynthesis" rel="Chapter" href="FaultTreeSynthesis.html">
+<link title="Modeling" rel="Chapter" href="Modeling.html">
+<link title="Qualitative" rel="Chapter" href="Qualitative.html">
+<link title="Quantitative" rel="Chapter" href="Quantitative.html">
+<link title="SafetyAnalysis" rel="Chapter" href="SafetyAnalysis.html">
+<link title="Validation" rel="Chapter" href="Validation.html">
+<link title="Visualization" rel="Chapter" href="Visualization.html"><title>Index of values</title>
+</head>
+<body>
+<div class="navbar">&nbsp;<a class="up" href="index.html" title="Index">Up</a>
+&nbsp;</div>
+<h1>Index of values</h1>
+<table>
+<tr><td align="left"><br>C</td></tr>
+<tr><td><a href="Validation.html#VALcheckLibrary_allOutputFaultsHaveFormulas">checkLibrary_allOutputFaultsHaveFormulas</a> [<a href="Validation.html">Validation</a>]</td>
+<td><div class="info">
+A function that checks that all library component flows have a formula defined.
+</div>
+</td></tr>
+<tr><td><a href="Validation.html#VALcheckLibrary_componentUnique">checkLibrary_componentUnique</a> [<a href="Validation.html">Validation</a>]</td>
+<td><div class="info">
+A function that checks that a library of components is a list of components, such that no two components have the same name.
+</div>
+</td></tr>
+<tr><td><a href="Validation.html#VALcheckLibrary_disjointInputFlowsandBasicEvents">checkLibrary_disjointInputFlowsandBasicEvents</a> [<a href="Validation.html">Validation</a>]</td>
+<td><div class="info">
+A function that checks that the library component names used for input flows and basic events are disjoint.
+</div>
+</td></tr>
+<tr><td><a href="Validation.html#VALcheckLibrary_formulasMakeSense">checkLibrary_formulasMakeSense</a> [<a href="Validation.html">Validation</a>]</td>
+<td><div class="info">
+A function that checks that the formulas of all library components make sense.
+</div>
+</td></tr>
+<tr><td><a href="Validation.html#VALcheckLibrary_listsAreConsistentLengths">checkLibrary_listsAreConsistentLengths</a> [<a href="Validation.html">Validation</a>]</td>
+<td><div class="info">
+A function that checks that the lists within each library component are all of consistent lengths, e.g., the length of basic_events is the same as the length of event_info.
+</div>
+</td></tr>
+<tr><td><a href="Validation.html#VALcheckLibrary_nonEmptyFaults">checkLibrary_nonEmptyFaults</a> [<a href="Validation.html">Validation</a>]</td>
+<td><div class="info">
+A function that checks that all components in a library support at least one flow.
+</div>
+</td></tr>
+<tr><td><a href="Validation.html#VALcheckModel_cnameInstanceIsDefinedInLibrary">checkModel_cnameInstanceIsDefinedInLibrary</a> [<a href="Validation.html">Validation</a>]</td>
+<td><div class="info">
+A function that checks that all in a model, relative to a library, the model c_names correspond to actual components in the component library.
+</div>
+</td></tr>
+<tr><td><a href="Validation.html#VALcheckModel_exposureOfBasicIsDefinedInLibrary">checkModel_exposureOfBasicIsDefinedInLibrary</a> [<a href="Validation.html">Validation</a>]</td>
+<td><div class="info">
+A function that checks that the model elements, relative to a library, of the form (a, x) in exposures of an instance make sense, i.e., there is a basic event named a in the component being instantiated.
+</div>
+</td></tr>
+<tr><td><a href="Validation.html#VALcheckModel_inputFlowUnique">checkModel_inputFlowUnique</a> [<a href="Validation.html">Validation</a>]</td>
+<td><div class="info">
+A function that checks that in the connections of a model, input flows have at most 1 instance connected to them.
+</div>
+</td></tr>
+<tr><td><a href="Validation.html#VALcheckModel_instanceNameUnique">checkModel_instanceNameUnique</a> [<a href="Validation.html">Validation</a>]</td>
+<td><div class="info">
+A function that checks that in a model all instance names are disjoint.
+</div>
+</td></tr>
+<tr><td><a href="Validation.html#VALcheckModel_validConnections">checkModel_validConnections</a> [<a href="Validation.html">Validation</a>]</td>
+<td><div class="info">
+A function that checks that the model connections, relative to a library, is a list of pairs consisting of an input flow and an instance.
+</div>
+</td></tr>
+<tr><td><a href="Qualitative.html#VALcutsets">cutsets</a> [<a href="Qualitative.html">Qualitative</a>]</td>
+<td><div class="info">
+A function that given a fault tree generates the cutsets of the tree.
+</div>
+</td></tr>
+<tr><td align="left"><br>D</td></tr>
+<tr><td><a href="Visualization.html#VALdot_exe">dot_exe</a> [<a href="Visualization.html">Visualization</a>]</td>
+<td></td></tr>
+<tr><td><a href="Visualization.html#VALdot_gen_show_direct_tree_file">dot_gen_show_direct_tree_file</a> [<a href="Visualization.html">Visualization</a>]</td>
+<td><div class="info">
+A function for directly visualizing fault trees.
+</div>
+</td></tr>
+<tr><td><a href="Visualization.html#VALdot_gen_show_fault_file">dot_gen_show_fault_file</a> [<a href="Visualization.html">Visualization</a>]</td>
+<td><div class="info">
+This function generates and displays a visualization of the propagation of
+    faults through the architecture.
+</div>
+</td></tr>
+<tr><td><a href="Visualization.html#VALdot_gen_show_formula_file">dot_gen_show_formula_file</a> [<a href="Visualization.html">Visualization</a>]</td>
+<td><div class="info">
+A function for visualizing monotone Boolean formulas.
+</div>
+</td></tr>
+<tr><td><a href="Visualization.html#VALdot_gen_show_funct_file">dot_gen_show_funct_file</a> [<a href="Visualization.html">Visualization</a>]</td>
+<td><div class="info">
+This function generates and displays a visualization of the functional
+    architecture.
+</div>
+</td></tr>
+<tr><td><a href="Visualization.html#VALdot_gen_show_nndsimp_tree_file">dot_gen_show_nndsimp_tree_file</a> [<a href="Visualization.html">Visualization</a>]</td>
+<td></td></tr>
+<tr><td><a href="Visualization.html#VALdot_gen_show_ph_file">dot_gen_show_ph_file</a> [<a href="Visualization.html">Visualization</a>]</td>
+<td><div class="info">
+This function generates and displays a visualization of the physical
+    architecture.
+</div>
+</td></tr>
+<tr><td><a href="Visualization.html#VALdot_gen_show_ssfc_tree_file">dot_gen_show_ssfc_tree_file</a> [<a href="Visualization.html">Visualization</a>]</td>
+<td></td></tr>
+<tr><td><a href="Visualization.html#VALdot_gen_show_tree_file">dot_gen_show_tree_file</a> [<a href="Visualization.html">Visualization</a>]</td>
+<td><div class="info">
+A function for simplifying and visualizing fault trees.
+</div>
+</td></tr>
+<tr><td align="left"><br>F</td></tr>
+<tr><td><a href="Qualitative.html#VALformulaOfTree">formulaOfTree</a> [<a href="Qualitative.html">Qualitative</a>]</td>
+<td><div class="info">
+Code for translating a tree into a formula
+</div>
+</td></tr>
+<tr><td align="left"><br>M</td></tr>
+<tr><td><a href="Modeling.html#VALmakeInstance">makeInstance</a> [<a href="Modeling.html">Modeling</a>]</td>
+<td><div class="info">
+Function for making instances of components.
+</div>
+</td></tr>
+<tr><td><a href="FaultTreeSynthesis.html#VALmodel_to_ftree">model_to_ftree</a> [<a href="FaultTreeSynthesis.html">FaultTreeSynthesis</a>]</td>
+<td><div class="info">
+Given a library of components and a model, synthesize the fault tree
+    corresponding to the top-level event of the model.
+</div>
+</td></tr>
+<tr><td align="left"><br>P</td></tr>
+<tr><td><a href="Quantitative.html#VALprobErrorCut">probErrorCut</a> [<a href="Quantitative.html">Quantitative</a>]</td>
+<td><div class="info">
+A function that given a fault tree, computes the top-level probability of a
+    fault.
+</div>
+</td></tr>
+<tr><td><a href="Quantitative.html#VALprobErrorCutC">probErrorCutC</a> [<a href="Quantitative.html">Quantitative</a>]</td>
+<td><div class="info">
+A function that given a fault tree and cutsets, computes the top-level
+    probability of a fault.
+</div>
+</td></tr>
+<tr><td><a href="Quantitative.html#VALprobErrorCutCImp">probErrorCutCImp</a> [<a href="Quantitative.html">Quantitative</a>]</td>
+<td><div class="info">
+A function that given a fault tree and cutsets, computes importance measures.
+</div>
+</td></tr>
+<tr><td><a href="Quantitative.html#VALprobErrorCutImp">probErrorCutImp</a> [<a href="Quantitative.html">Quantitative</a>]</td>
+<td><div class="info">
+A function that given a fault tree, computes importance measures.
+</div>
+</td></tr>
+<tr><td align="left"><br>S</td></tr>
+<tr><td><a href="Qualitative.html#VALsop">sop</a> [<a href="Qualitative.html">Qualitative</a>]</td>
+<td><div class="info">
+Given any monotone Boolean formula, sop returns a simplified formula in DNF
+    (sum of products form).
+</div>
+</td></tr>
+<tr><td><a href="Qualitative.html#VALssfc">ssfc</a> [<a href="Qualitative.html">Qualitative</a>]</td>
+<td><div class="info">
+This is a function that given a formula simplifies it by applying constant
+    propagation, flattening, removal of duplicate literals and subexpressions,
+    and also sorts the resulting formula so that simpler terms are shown
+    first.
+</div>
+</td></tr>
+<tr><td><a href="Qualitative.html#VALsslfc">sslfc</a> [<a href="Qualitative.html">Qualitative</a>]</td>
+<td></td></tr>
+<tr><td><a href="Qualitative.html#VALsslnfc">sslnfc</a> [<a href="Qualitative.html">Qualitative</a>]</td>
+<td></td></tr>
+<tr><td><a href="Qualitative.html#VALssnfc">ssnfc</a> [<a href="Qualitative.html">Qualitative</a>]</td>
+<td></td></tr>
+<tr><td align="left"><br>U</td></tr>
+<tr><td><a href="Visualization.html#VALunflatten_exe">unflatten_exe</a> [<a href="Visualization.html">Visualization</a>]</td>
+<td></td></tr>
+<tr><td><a href="FaultTreeSynthesis.html#VALupdate_comp_form">update_comp_form</a> [<a href="FaultTreeSynthesis.html">FaultTreeSynthesis</a>]</td>
+<td></td></tr>
+<tr><td><a href="FaultTreeSynthesis.html#VALupdate_comp_forms">update_comp_forms</a> [<a href="FaultTreeSynthesis.html">FaultTreeSynthesis</a>]</td>
+<td></td></tr>
+<tr><td><a href="FaultTreeSynthesis.html#VALupdate_component">update_component</a> [<a href="FaultTreeSynthesis.html">FaultTreeSynthesis</a>]</td>
+<td></td></tr>
+<tr><td><a href="FaultTreeSynthesis.html#VALupdate_library">update_library</a> [<a href="FaultTreeSynthesis.html">FaultTreeSynthesis</a>]</td>
+<td></td></tr>
+</table>
+</body>
+</html>

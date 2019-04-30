@@ -1,0 +1,226 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="previous" href="FaultTreeSynthesis.html">
+<link rel="next" href="Qualitative.html">
+<link rel="Up" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="FaultTree" rel="Chapter" href="FaultTree.html">
+<link title="FaultTreeSynthesis" rel="Chapter" href="FaultTreeSynthesis.html">
+<link title="Modeling" rel="Chapter" href="Modeling.html">
+<link title="Qualitative" rel="Chapter" href="Qualitative.html">
+<link title="Quantitative" rel="Chapter" href="Quantitative.html">
+<link title="SafetyAnalysis" rel="Chapter" href="SafetyAnalysis.html">
+<link title="Visualization" rel="Chapter" href="Visualization.html"><title>Modeling</title>
+</head>
+<body>
+<div class="navbar"><a class="pre" href="FaultTreeSynthesis.html" title="FaultTreeSynthesis">Previous</a>
+&nbsp;<a class="up" href="index.html" title="Index">Up</a>
+&nbsp;<a class="post" href="Qualitative.html" title="Qualitative">Next</a>
+</div>
+<h1>Module <a href="type_Modeling.html">Modeling</a></h1>
+
+<pre><span class="keyword">module</span> Modeling: <code class="code">sig</code> <a href="Modeling.html">..</a> <code class="code">end</code></pre><div class="info module top">
+Fault trees should not be constructed manually by typical users. Instead,
+   they should be synthesized from libraries of components and
+   models. Components are represented with the <i>component</i> type; component
+   instances are represented with the <i>instance</i> type; component libraries are
+   just a list of components; and models are represented with the <i>model</i>
+   type. Here is an example of a library. It is just a list of components.
+<p>
+
+   <pre class="codepre"><code class="code">   let nasa_handbook_lib =
+   [ {name         = "System"; 
+      faults       = ["fault"]; 
+      input_flows  = ["in"];
+      basic_events = ["sys_fl"];
+      event_info   = [(1.e-6, 1.)];
+      output_flows = ["out"];
+      formulas     = [(["out"; "fault"], Or [F ["sys_fl"]; F ["in"; "fault"]])] }];; 
+   </code></pre>
+<p>
+
+   Here is an example of a model. It is a list of component instances along with
+   connection information and the identification of a top-level fault.
+<p>
+
+   <pre class="codepre"><code class="code">   let nasa_handbook_model =
+   { instances =  [ makeInstance "Orbiter" "System" ();
+                    makeInstance "Main Engine" "System" (); ];
+   connections =  [ (("Orbiter", "in"), ("Main Engine", "out"));
+                    (("Main Engine", "in"), ("Orbiter", "out")); ];
+   top_fault =("Orbiter", F["out"; "fault"]) } ;;
+   </code></pre><br>
+</div>
+<hr width="100%">
+
+<pre><code><span id="TYPEformula"><span class="keyword">type</span> <code class="type">'a</code> formula</span> = </code></pre><table class="typetable">
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTformula.F"><span class="constructor">F</span></span> <span class="keyword">of</span> <code class="type">'a</code></code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTformula.And"><span class="constructor">And</span></span> <span class="keyword">of</span> <code class="type">'a <a href="Modeling.html#TYPEformula">formula</a> list</code></code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTformula.Or"><span class="constructor">Or</span></span> <span class="keyword">of</span> <code class="type">'a <a href="Modeling.html#TYPEformula">formula</a> list</code></code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code><span class="keyword">|</span></code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTformula.N_of"><span class="constructor">N_of</span></span> <span class="keyword">of</span> <code class="type">int * 'a <a href="Modeling.html#TYPEformula">formula</a> list</code></code></td>
+
+</tr></table>
+
+<div class="info ">
+Type definition for a formula used in cformulas.<br>
+</div>
+
+
+<pre><span id="TYPEcformula"><span class="keyword">type</span> <code class="type">'a</code> cformula</span> = <code class="type">string list * 'a <a href="Modeling.html#TYPEformula">formula</a></code> </pre>
+
+
+<pre><code><span id="TYPEcomponent"><span class="keyword">type</span> <code class="type"></code>component</span> = {</code></pre><table class="typetable">
+<tr>
+<td align="left" valign="top" >
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTcomponent.name">name</span>&nbsp;: <code class="type">string</code>;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTcomponent.faults">faults</span>&nbsp;: <code class="type">string list</code>;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTcomponent.input_flows">input_flows</span>&nbsp;: <code class="type">string list</code>;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTcomponent.basic_events">basic_events</span>&nbsp;: <code class="type">string list</code>;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTcomponent.event_info">event_info</span>&nbsp;: <code class="type">(float * float) list</code>;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTcomponent.output_flows">output_flows</span>&nbsp;: <code class="type">string list</code>;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTcomponent.formulas">formulas</span>&nbsp;: <code class="type">string list <a href="Modeling.html#TYPEcformula">cformula</a> list</code>;</code></td>
+
+</tr></table>
+}
+
+<div class="info ">
+Type definition for a component.<br>
+</div>
+
+
+<pre><code><span id="TYPEinstance"><span class="keyword">type</span> <code class="type"></code>instance</span> = {</code></pre><table class="typetable">
+<tr>
+<td align="left" valign="top" >
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTinstance.i_name">i_name</span>&nbsp;: <code class="type">string</code>;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTinstance.c_name">c_name</span>&nbsp;: <code class="type">string</code>;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTinstance.exposures">exposures</span>&nbsp;: <code class="type">(string * float) list</code>;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTinstance.lambdas">lambdas</span>&nbsp;: <code class="type">(string * float) list</code>;</code></td>
+
+</tr></table>
+}
+
+<div class="info ">
+Type definition for an instance of a component.<br>
+</div>
+
+
+<pre><span id="VALmakeInstance"><span class="keyword">val</span> makeInstance</span> : <code class="type">?t:(string * float) list -><br>       ?l:(string * float) list -> i:string -> c:string -> unit -> <a href="Modeling.html#TYPEinstance">instance</a></code></pre><div class="info ">
+Function for making instances of components.<br>
+</div>
+
+<pre><code><span id="TYPEmodel"><span class="keyword">type</span> <code class="type"></code>model</span> = {</code></pre><table class="typetable">
+<tr>
+<td align="left" valign="top" >
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTmodel.instances">instances</span>&nbsp;: <code class="type"><a href="Modeling.html#TYPEinstance">instance</a> list</code>;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTmodel.connections">connections</span>&nbsp;: <code class="type">((string * string) * (string * string)) list</code>;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top" >
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top" >
+<code><span id="TYPEELTmodel.top_fault">top_fault</span>&nbsp;: <code class="type">string * string list <a href="Modeling.html#TYPEformula">formula</a></code>;</code></td>
+
+</tr></table>
+}
+
+<div class="info ">
+Type definition of a model<br>
+</div>
+
+</body></html>
